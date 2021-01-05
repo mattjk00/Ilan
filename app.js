@@ -106,8 +106,8 @@ function createCard(linkdata) {
   content.innerHTML = linkdata[1] + "-- " + linkdata[0];
   entry.appendChild(content);
 
-  entry.setAttribute("src", linkdata[1]);
-  entry.setAttribute("displayText", linkdata[0]);
+  entry.setAttribute("src", linkdata[0]);
+  entry.setAttribute("displayText", linkdata[1]);
   entry.setAttribute("list", linkdata[2]);
   entry.setAttribute("order", linkdata[3]);
   entry.setAttribute("uid", linkdata[4]);
