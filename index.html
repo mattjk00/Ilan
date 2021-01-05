@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/js/uikit-icons.min.js"></script>
+
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body style="background-color: #161616;"  class="uk-light">
+        <h1 class="uk-light uk-heading-divider uk-heading-bullet uk-padding-small" id="header"><span>Ilan Natter</span></h1>
+
+        <div class="uk-container">
+            <h4>Mixing</h4>
+            <div uk-spinner class="spinner"></div>
+            <ul class="uk-list uk-list-hyphen" id="mixing">
+                
+
+            </ul>
+
+            <hr class="uk-divider-icon">
+
+
+            <h4>Mastering</h4>
+            <div uk-spinner class="spinner"></div>
+            <ul class="uk-list uk-list-hyphen" id="mastering"> 
+
+            </ul>
+
+            <hr class="uk-divider-icon">
+
+
+            <h4>Engineering</h4>
+            <div uk-spinner class="spinner"></div>
+            <ul class="uk-list uk-list-hyphen" id="engineering">
+
+            </ul>
+
+            <hr class="uk-divider-icon">
+
+            
+
+        </div>
+        <div class="uk-position-bottom-center">
+            <p class="uk-text-muted">Website by Matthew Kleitz, 2021</p>
+        </div>
+    </body>
+    <script src="app.js"></script>
+    <script>
+        getData(displayData);
+    </script>
+</html>

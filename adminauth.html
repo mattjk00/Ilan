@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/css/uikit.min.css" />
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/js/uikit-icons.min.js"></script>
+    </head>
+    <body class="uk-dark">
+        <h1 class="uk-heading-divider uk-heading-bullet uk-padding-small" id="header"><span>Admin</span></h1>
+        <div id="login-form" class="uk-container">
+            <form>
+                <fieldset class="uk-fieldset">
+            
+                    <legend class="uk-legend">Login</legend>
+            
+                    <div class="uk-margin uk-form-width-medium">
+                        <input class="uk-input" type="text" placeholder="Username" id="username">
+                    </div>
+
+                    <div class="uk-margin uk-form-width-medium">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                            <input class="uk-input" type="password" id="password">
+                        </div>
+                    </div>
+
+                    
+                </fieldset>
+                
+            </form>
+            <button class="uk-button uk-button-primary" id="loginButton" onclick="submitLoginForm();">Enter</button>
+            <div id="spinner" style="display: none;">
+                <div uk-spinner ></div>
+            </div>
+            <div id="notif" style="display: none;">
+                <div uk-alert class="uk-alert-danger" >Invalid Login</div>
+            </div>
+            
+        </div>
+    </body>
+    <script src="app.js"></script>
+</html>

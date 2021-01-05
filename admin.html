@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/css/uikit.min.css" />
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.7/dist/js/uikit-icons.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    </head>
+    <body class="uk-dark">
+        <h1 class="uk-heading-divider uk-heading-bullet uk-padding-small" id="header"><span>Admin</span></h1>
+        <div class="uk-container"></div>
+            <div class="uk-child-width-1-4@s" uk-grid>
+                <div>
+                    <h4>Mixing</h4>
+                    <div uk-sortable="group: sortable-group" id="mixing">
+
+                    </div>
+                </div>
+                <div>
+                    <h4>Mastering</h4>
+                    <div uk-sortable="group: sortable-group" id="mastering">
+
+                    </div>
+                </div>
+                <div >
+                    <h4>Engineering</h4>
+                    <div uk-sortable="group: sortable-group" id="engineering">
+                        
+                </div>
+                <div >
+                    <h4>Trashcan</h4>
+                    <div uk-sortable="group: sortable-group" id="trashcan">
+                        
+                </div>
+            </div>
+            
+            
+        </div>
+        <br/>
+        <div class="uk-container">
+            <form>
+                <fieldset class="uk-fieldset">
+            
+                    <legend class="uk-legend">Add New Item</legend>
+            
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" placeholder="Display Text" id="displaytext">
+                    </div>
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" placeholder="URL" id="url">
+                    </div>
+                    
+                </fieldset>
+            </form>
+            <button class="uk-button uk-button-primary" id="addButton" onclick="addItem()">Add Item</button>
+            <br/><br/>
+            <button class="uk-button uk-button-secondary" id="saveButton" onclick="saveEdits();">Save Edits</button> 
+            <div uk-spinner id="adminspinner"></div>    
+            <span class="uk-margin-small-right" uk-icon="check" id="admincheck"></span>   
+        </div>
+            
+    </body>
+    <script src="app.js"></script>
+    <script>
+        prepareAdminPage();
+        getData(adminListData);
+    </script>
+</html>
