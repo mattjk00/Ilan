@@ -122,7 +122,7 @@ function addItem() {
   let url = urlbox.value;
 
   if (dt !== "" && url !== "") {
-    let card = createCard([dt, url, MIX, 0, dt + Date.now()]);
+    let card = createCard([url, dt, MIX, 0, dt + Date.now()]);
     document.getElementById(MIX).appendChild(card);
 
     dtbox.value = "";
@@ -133,12 +133,10 @@ function addItem() {
 }
 
 $(document).ready(function() {
-  $(".uk-sortable").bind('DOMNodeInserted', function() {
-    console.log('node inserted');
-  });
+  $(".uk-sortable").bind('DOMNodeInserted', listMoved);
   
-  $(".uk-sortable").on("touchend", listMoved);
-  $(".uk-sortable").on("mouseup mouseleave", listMoved);
+  /*$(".uk-sortable").on("touchend", listMoved);
+  $(".uk-sortable").on("mouseup mouseleave", listMoved);*/
 });
 
 
