@@ -88,6 +88,8 @@ function displayData() {
 }
 
 function adminListData() {
+    
+
     for (let key of linkMap.keys()) {
         let listDom = document.getElementById(key);
         let links = linkMap.get(key);
@@ -137,6 +139,8 @@ $(document).ready(function() {
   
   /*$(".uk-sortable").on("touchend", listMoved);
   $(".uk-sortable").on("mouseup mouseleave", listMoved);*/
+
+  
 });
 
 
@@ -157,6 +161,8 @@ function prepareAdminPage() {
 
   check = $("#admincheck");
   check.hide();
+
+    
 }
 
 
