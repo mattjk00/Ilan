@@ -132,12 +132,15 @@ function addItem() {
   
 }
 
-$(".uk-sortable").bind('DOMNodeInserted', function() {
-  console.log('node inserted');
+$(document).ready(function() {
+  $(".uk-sortable").bind('DOMNodeInserted', function() {
+    console.log('node inserted');
+  });
+  
+  $(".uk-sortable").on("touchend", listMoved);
+  $(".uk-sortable").on("mouseup mouseleave", listMoved);
 });
 
-$(".uk-sortable").on("touchend", listMoved);
-$(".uk-sortable").on("mouseup mouseleave", listMoved);
 
 function listMoved(e) {
   let listDomItems = e.currentTarget.children;
