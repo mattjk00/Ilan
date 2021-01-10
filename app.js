@@ -140,7 +140,13 @@ $(document).ready(function() {
   /*$(".uk-sortable").on("touchend", listMoved);
   $(".uk-sortable").on("mouseup mouseleave", listMoved);*/
 
-  
+  $(".ftInfo").hide();
+  $(".ft").hover(function() {
+    $(this).children('.ftInfo').eq(0).fadeTo(100, 0.98);
+  },
+  function() {
+    $(this).children('.ftInfo').eq(0).fadeOut(100);
+  });
 });
 
 

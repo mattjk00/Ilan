@@ -14,3 +14,11 @@ body {
     background-size:cover;
     height:100vh;
 }
+
+#nav {
+    background-color: rgb(31, 31, 31);
+}
+
+.ftInfo {
+    background-color:rgb(19, 19, 19);
+}
