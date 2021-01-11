@@ -26,6 +26,10 @@ body {
     background-color:rgb(19, 19, 19);
 }
 
+.ftInfo:hover {
+    cursor:pointer;
+}
+
 .ft {
     margin-left: 10px;
 }

@@ -147,6 +147,10 @@ $(document).ready(function() {
   function() {
     $(this).children('.ftInfo').eq(0).fadeOut(200);
   });
+
+  $(".ft").click(function() {
+      window.location.href = "https://lipcritic.bandcamp.com";
+  });
 });
 
 
