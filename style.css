@@ -31,5 +31,13 @@ body {
 }
 
 .ft {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
+}
+
+.discli * {
+    display: inline;
+}
+
+#creds {
+    background-color: rgb(19, 19, 19);
 }

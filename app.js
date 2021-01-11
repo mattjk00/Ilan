@@ -7,6 +7,8 @@ linkMap.set(MIX, []);
 linkMap.set(MAS, []);
 linkMap.set(ENG, []);
 
+let discData = [];
+
 
 var firebaseConfig = {
     apiKey: "AIzaSyAZVS4VPzvlkpopkhJrie1Onk7-RNe4mZs",
@@ -22,8 +24,7 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 function sortLinks(a, b) {
-  console.log(a, b);
-  return parseInt(a[3]) - parseInt(b[3]);
+  return a.order - b.order;
 }
 
 function submitLoginForm() {
@@ -60,9 +61,11 @@ function getData(onComplete) {
 
         querySnapshot.forEach(function(doc) {
             let data = doc.data();
-            linkMap.get(data.list).push([data.src, data.displayText, data.list, data.order, doc.id]);
+            //linkMap.get(data.list).push([data.src, data.displayText, data.list, data.order, doc.id]);
 
-            linkMap.get(data.list).sort(sortLinks);
+            //linkMap.get(data.list).sort(sortLinks);
+            discData.push(data);
+            discData.sort(sortLinks);
         });
         onComplete();
     })
@@ -73,7 +76,7 @@ function getData(onComplete) {
 }
 
 function displayData() {
-    for (let key of linkMap.keys()) {
+    /*for (let key of linkMap.keys()) {
         let listDom = document.getElementById(key);
         let links = linkMap.get(key);
         for (let i = 0; i < links.length; i++) {
@@ -84,20 +87,39 @@ function displayData() {
             entry.appendChild(linkNode);
             listDom.appendChild(entry);
         }
+    }*/
+    let listDom = document.getElementById("dlist");
+    for (let i = 0; i < discData.length; i++) {
+      var entry = document.createElement('li');
+      entry.classList.add("discli");
+      var linkNode = document.createElement('a');
+      var roleNode = document.createElement('p');
+      let data = discData[i];
+      linkNode.href = data.src;
+      linkNode.innerHTML = data.displayText;
+      entry.appendChild(linkNode);
+      roleNode.innerHTML = " - " + data.list;
+      roleNode.classList.add("uk-text-italic");
+      entry.appendChild(roleNode);
+      listDom.appendChild(entry);
     }
 }
 
 function adminListData() {
-    
+    let listDom = document.getElementById("dlistadmin");
+    for (let i = 0; i < discData.length; i++) {
+        let entry = createCard(discData[i]);
+        listDom.appendChild(entry);  
+    }
 
-    for (let key of linkMap.keys()) {
+    /*for (let key of linkMap.keys()) {
         let listDom = document.getElementById(key);
         let links = linkMap.get(key);
         for (let i = 0; i < links.length; i++) {
             let entry = createCard(links[i])
             listDom.appendChild(entry);
         }
-    }
+    }*/
 }
 
 function createCard(linkdata) {
@@ -105,14 +127,16 @@ function createCard(linkdata) {
   entry.classList.add("uk-margin");
   var content = document.createElement("div");
   content.classList.add("uk-card", "uk-card-default", "uk-card-body", "uk-card-small");
-  content.innerHTML = linkdata[1] + "-- " + linkdata[0];
+  content.innerHTML = linkdata.displayText + "-- " + linkdata.src;
   entry.appendChild(content);
 
-  entry.setAttribute("src", linkdata[0]);
-  entry.setAttribute("displayText", linkdata[1]);
-  entry.setAttribute("list", linkdata[2]);
-  entry.setAttribute("order", linkdata[3]);
-  entry.setAttribute("uid", linkdata[4]);
+  entry.setAttribute("src", linkdata.src);
+  entry.setAttribute("displayText", linkdata.displayText);
+  entry.setAttribute("list", linkdata.list);
+  entry.setAttribute("order", linkdata.order);
+  entry.setAttribute("uid", linkdata.uid);
+
+  console.log(linkdata);
 
   return entry;
 }
@@ -120,12 +144,21 @@ function createCard(linkdata) {
 function addItem() {
   let dtbox = document.getElementById("displaytext");
   let urlbox = document.getElementById("url");
+  let rolebox = document.getElementById("role");
   let dt = dtbox.value;
   let url = urlbox.value;
+  let role = rolebox.value;
 
   if (dt !== "" && url !== "") {
-    let card = createCard([url, dt, MIX, 0, dt + Date.now()]);
-    document.getElementById(MIX).appendChild(card);
+    let dobj = {
+        src: url,
+        displayText: dt,
+        list: role,
+        order: discData.length - 1,
+        uid: dt + Date.now()
+    }
+    let card = createCard(dobj);
+    document.getElementById("dlistadmin").appendChild(card);
 
     dtbox.value = "";
     urlbox.value = "";
@@ -149,7 +182,7 @@ $(document).ready(function() {
   });
 
   $(".ft").click(function() {
-      window.location.href = "https://lipcritic.bandcamp.com";
+      window.location.href = $(this).children('.ftInfo').eq(0).attr("href");
   });
 });
 
@@ -158,7 +191,7 @@ function listMoved(e) {
   let listDomItems = e.currentTarget.children;
   
   for (let i = 0; i < listDomItems.length; i++) {
-      listDomItems[i].setAttribute("list", e.currentTarget.id);
+      //listDomItems[i].setAttribute("list", e.currentTarget.id);
       listDomItems[i].setAttribute("order", i);
   }
 }
@@ -178,9 +211,10 @@ function prepareAdminPage() {
 
 
 function saveEdits() {
-    for (let key of linkMap.keys()) {
-        let listDom = document.getElementById(key);
-        let listDomItems = listDom.children;
+    let listDom = document.getElementById("dlistadmin");
+    let listDomItems = listDom.children;
+       
+        
 
         check.hide();
         spinner.show();
@@ -191,14 +225,18 @@ function saveEdits() {
             let orde = listDomItems[i].getAttribute("order");
             let sr = listDomItems[i].getAttribute("src");
             let displaytex = listDomItems[i].getAttribute("displayText");
-            let uid = listDomItems[i].getAttribute("uid");
+            let uuid = listDomItems[i].getAttribute("uid");
             
-            db.collection("links").doc(uid).set({
+            let saveObj = {
               list: lis,
               order: orde,
               src: sr,
-              displayText: displaytex
-            }).then(function() {
+              displayText: displaytex,
+              uid: uuid
+            };
+            console.log(saveObj);
+
+            db.collection("links").doc(uuid).set(saveObj).then(function() {
               console.log("write success!");
               spinner.hide();
               check.show();
@@ -206,21 +244,21 @@ function saveEdits() {
               alert(error);
             });
         }
-    }
+    
 
     check.hide();
     spinner.show();
 
-    let listDom = document.getElementById("trashcan");
-    let listDomItems = listDom.children;
+    let listDomTc = document.getElementById("trashcan");
+    let listDomItemsTc = listDomTc.children;
 
-    for (let i = 0; i < listDomItems.length; i++) {
-        let uid = listDomItems[i].getAttribute("uid");
+    for (let i = 0; i < listDomItemsTc.length; i++) {
+        let uid = listDomItemsTc[i].getAttribute("uid");
         db.collection("links").doc(uid).delete().then(function() {
           console.log("write success!");
           spinner.hide();
           check.show();
-          listDom.removeChild(listDomItems[i]);
+          listDomTc.removeChild(listDomItemsTc[i]);
         }).catch((error) => {
           alert(error);
         });
