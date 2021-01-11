@@ -21,10 +21,10 @@
     <body class="uk-dark">
         
         <div id="header">
-        <h1 class="uk-text-large uk-text-center uk-light uk-padding-small"><span>Ilan Natter</span></h1>
+        <h1 class="uk-heading uk-text-center uk-light uk-padding-small"><span id="headerText">Ilan Natter</span></h1>
 
         <ul class="uk-flex-center uk-subnav uk-subnav-pill uk-text-center" uk-switcher="connect:.uk-switcher" id="nav">
-            <li><a href="#">Featured</a></li>
+            <li><a href="#" id="featuredLink">Featured</a></li>
             <li><a href="#">Discography</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
@@ -33,9 +33,9 @@
         <ul class="uk-switcher uk-margin" id="abc" abc>
             <!-- FEATURED -->
             <li>
-                <div class="uk-container uk-light">
-                    <div class="uk-child-width-expand@m uk-grid-match uk-grid-large" uk-grid>
-                        <div class="uk-card uk-card-body uk-background-cover uk-height-medium uk-width-medium ft" data-src="https://f4.bcbits.com/img/a4151206807_16.jpg" uk-img>
+                <div class="uk-container uk-light " id="ftcon">
+                    <div class="uk-child-width-expand@m uk-grid-match uk-grid-large uk-margin-large-bottom" id="ftgrid"  uk-grid>
+                        <div class="uk-card uk-card-body uk-background-cover uk-height-medium uk-width-medium ft uk-margin-medium-left" data-src="https://f4.bcbits.com/img/a4151206807_16.jpg" uk-img>
                             <div class="ftInfo" href="https://lipcritic.bandcamp.com/album/lip-critic-ii">
                                 <article class="uk-article uk-padding-small">
                                     <h1 class="uk-text-lead uk-text-emphasis">Lip Critic II, Lip Critic</h1>
@@ -73,11 +73,31 @@
                             </div>
                         </div>
 
-                        <div class="uk-card uk-card-body uk-background-cover uk-height-medium uk-width-medium ft uk-margin-small-left" data-src="https://f4.bcbits.com/img/a3670149931_16.jpg" uk-img>
+                        <div class="uk-card uk-card-body uk-background-cover uk-height-medium uk-width-medium ft uk-margin-medium-left" data-src="https://f4.bcbits.com/img/a3670149931_16.jpg" uk-img>
                             <div class="ftInfo" href="https://onpink.bandcamp.com/track/the-guy-is-cooked">
                                 <article class="uk-article uk-padding-small">
                                     <h1 class="uk-text-lead uk-text-emphasis">The Guy Is Cooked, On Pink</h1>
                                     <p class="uk-article-meta uk-text-italic">Co-recorded and Mixed</p>
+                                    
+                                </article>
+                            </div>
+                        </div>
+
+                        <div class="uk-card uk-card-body uk-background-cover uk-height-medium uk-width-medium ft uk-margin-small-left" data-src="https://f4.bcbits.com/img/a1610240918_16.jpg" uk-img>
+                            <div class="ftInfo" href="https://swimrest.bandcamp.com/album/move-to-philly">
+                                <article class="uk-article uk-padding-small">
+                                    <h1 class="uk-text-lead uk-text-emphasis">Move To Philly, Swim Rest</h1>
+                                    <p class="uk-article-meta uk-text-italic">Mastered</p>
+                                    
+                                </article>
+                            </div>
+                        </div>
+
+                        <div class="uk-card uk-card-body uk-background-cover uk-height-medium uk-width-medium ft uk-margin-small-left" data-src="https://preludepress.com/wp-content/uploads/2020/12/Cezur-III-Drinks-On-Me-696x696.jpg" uk-img>
+                            <div class="ftInfo" href="https://open.spotify.com/album/1V0d3PIQkBSAYfRc1qUziB?si=6eGuBlASRiar7UwG_LR0nQ">
+                                <article class="uk-article uk-padding-small">
+                                    <h1 class="uk-text-lead uk-text-emphasis">DRINKS ON ME, Cezur III</h1>
+                                    <p class="uk-article-meta uk-text-italic">Mastered</p>
                                     
                                 </article>
                             </div>
@@ -97,10 +117,10 @@
             </li>
             <!-- DISCOG -->
             <li>
-                <div class="uk-container">
-                    <h4>Discography</h4>
+                <div class="uk-container uk-flex uk-flex-center uk-margin-medium-top">
+                    
                     <div uk-spinner class="spinner"></div>
-                    <ul class="uk-list uk-list-hyphen" id="dlist">
+                    <ul class="uk-list uk-list " id="dlist">
                         
         
                     </ul>
@@ -110,15 +130,17 @@
             </li>
             <!-- CONTACT -->
             <li>
-                <div class="uk-container uk-text-center uk-text-large uk-margin-top">
-                    
-                        <p uk-text>ilan.natter@gmail.com</p><br/>
-                        <p uk-text>@ilannatter</p><br/>
-                        <p uk-text>@lipcritic</p>
-                    
+                <div class="uk-container uk-text-center uk-margin-top  uk-flex uk-flex-center">
+                    <ul class="uk-list uk-list uk-margin-large-top">
+                        <li uk-text class="uk-text-lead uk-text-primary">ilan.natter@gmail.com</li>
+                        <li uk-text class="uk-text-large uk-text-primary">@ilannatter</li>
+                        <li class="uk-padding" id="lc">LIP CRITIC</li>
+                    </ul>
                 </div>
-                <div class="uk-position-bottom-center uk-padding-small" id="creds">
-                    <p class="uk-text-primary">Website by Matthew Kleitz, 2021</p>
+
+
+                <div class="uk-position-bottom-center uk-padding-small uk-width-large" id="creds">
+                    <p class="uk-light">Website by Matthew Kleitz, 2021</p>
                 </div>
             </li>
         </ul>

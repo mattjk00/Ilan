@@ -182,7 +182,15 @@ $(document).ready(function() {
   });
 
   $(".ft").click(function() {
-      window.location.href = $(this).children('.ftInfo').eq(0).attr("href");
+      window.open($(this).children('.ftInfo').eq(0).attr("href"), "_blank");
+  });
+
+  $("#headerText").click(function() {
+    $("#featuredLink").trigger("click");
+  });
+
+  $("#lc").click(function() {
+    window.open("http://1800bitethrough.com/", "_blank");
   });
 });
 
