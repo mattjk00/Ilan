@@ -12,8 +12,8 @@
    width: 100%;
 }
 body {
-    background-color: #ececec;
-    background-size:cover;
+    /*background-color: #b4b4b4;
+    background-size:cover;*/
     height:100vh;
 }
 
@@ -63,12 +63,12 @@ body {
 }
 
 #creds {
-    background-color: rgb(182, 182, 182);
+    background-color: rgb(56, 56, 56);
 }
 
 html {
     overflow-y:scroll;
-    background-color: #ececec;
+    background-color: #272727;
 }
 
 #ftgrid {
@@ -78,6 +78,7 @@ html {
 .mobilenot { display: none; }
 
 @media only screen and (max-width: 670px) {
-    .ft { width:100vw; height:100vw;}
+    .ft { width:100vw; height:100vw; box-shadow: 5px 5px 5px #111;}
+    /*#suki { margin-left: 5vw;}*/
     .mobilenot { display: block; }
 }

@@ -189,7 +189,7 @@ $(document).ready(function() {
   $(".ft").mouseup(function() {
       window.open($(this).children('.ftInfo').eq(0).attr("href"), "_blank");
   });
-  
+
   $("#headerText").click(function() {
       UIkit.switcher(document.getElementById("nav")).show(0);
   });
@@ -197,6 +197,11 @@ $(document).ready(function() {
   $("#lc").click(function() {
     window.open("http://1800bitethrough.com/", "_blank");
   });
+
+  if ($(window).width() <= 670) {
+    $(".ft").removeClass("uk-margin-medium-left");
+    //$("#ftcon").width(720);
+  }
 });
 
 
