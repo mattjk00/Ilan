@@ -74,3 +74,10 @@ html {
 #ftgrid {
     /*margin-left:0vw;*/
 }
+
+.mobilenot { display: none; }
+
+@media only screen and (max-width: 670px) {
+    .ft { width:100vw; height:100vw;}
+    .mobilenot { display: block; }
+}

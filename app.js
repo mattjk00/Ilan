@@ -167,6 +167,13 @@ function addItem() {
   
 }
 
+function fadeThemIn() {
+  $(this).children('.ftInfo').eq(0).fadeTo(200, 0.98);
+}
+function fadeThemOut() {
+  $(this).children('.ftInfo').eq(0).fadeOut(200);
+} 
+
 $(document).ready(function() {
   $(".uk-sortable").bind('DOMNodeInserted', listMoved);
   
@@ -174,17 +181,15 @@ $(document).ready(function() {
   $(".uk-sortable").on("mouseup mouseleave", listMoved);*/
 
   $(".ftInfo").hide();
-  $(".ft").hover(function() {
-    $(this).children('.ftInfo').eq(0).fadeTo(200, 0.98);
-  },
-  function() {
-    $(this).children('.ftInfo').eq(0).fadeOut(200);
-  });
+  $(".ft").hover(fadeThemIn, fadeThemOut);
 
-  $(".ft").click(function() {
+  $(".ft").on("touchstart", fadeThemIn);
+  $(".ft").on("touchend", fadeThemOut);
+
+  $(".ft").mouseup(function() {
       window.open($(this).children('.ftInfo').eq(0).attr("href"), "_blank");
   });
-
+  
   $("#headerText").click(function() {
       UIkit.switcher(document.getElementById("nav")).show(0);
   });
