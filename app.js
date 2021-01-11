@@ -186,7 +186,7 @@ $(document).ready(function() {
   });
 
   $("#headerText").click(function() {
-    $("#featuredLink").trigger("click");
+      UIkit.switcher(document.getElementById("nav")).show(0);
   });
 
   $("#lc").click(function() {
