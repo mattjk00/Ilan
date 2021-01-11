@@ -142,10 +142,10 @@ $(document).ready(function() {
 
   $(".ftInfo").hide();
   $(".ft").hover(function() {
-    $(this).children('.ftInfo').eq(0).fadeTo(100, 0.98);
+    $(this).children('.ftInfo').eq(0).fadeTo(200, 0.98);
   },
   function() {
-    $(this).children('.ftInfo').eq(0).fadeOut(100);
+    $(this).children('.ftInfo').eq(0).fadeOut(200);
   });
 });
 
