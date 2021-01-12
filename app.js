@@ -195,12 +195,12 @@ $(document).ready(function() {
   });
 
   $("#lc").click(function() {
-    window.open("http://1800bitethrough.com/", "_blank");
+    window.open("https://lipcritic.bandcamp.com/", "_blank");
   });
 
   if ($(window).width() <= 670) {
     $(".ft").removeClass("uk-margin-medium-left");
-    //$("#ftcon").width(720);
+    $(".firstInGrid").addClass("uk-width-medium uk-height-medium");
   }
 });
 

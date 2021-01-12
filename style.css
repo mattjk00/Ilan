@@ -36,6 +36,7 @@ body {
     font-weight: bolder;
 }
 
+
 #headerText {
     cursor:pointer;
 }
@@ -52,10 +53,6 @@ body {
   25%  {background-color: rgb(34, 54, 63);}
   50%  {background-color: rgb(73, 73, 112);}
   100% {background-color: rgb(0, 0, 0)}
-}
-
-.ft {
-    /*margin-left: 10px;*/
 }
 
 .discli * {
@@ -75,10 +72,14 @@ html {
     /*margin-left:0vw;*/
 }
 
+#lc {
+    border:1px solid #555;
+}
+
 .mobilenot { display: none; }
 
 @media only screen and (max-width: 670px) {
-    .ft { width:100vw; height:100vw; box-shadow: 5px 5px 5px #111;}
+    .fttt { margin-left:2vw; box-shadow: 5px 5px 5px #111;}
     /*#suki { margin-left: 5vw;}*/
     .mobilenot { display: block; }
 }
