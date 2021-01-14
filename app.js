@@ -183,11 +183,21 @@ $(document).ready(function() {
   $(".ftInfo").hide();
   $(".ft").hover(fadeThemIn, fadeThemOut);
 
-  $(".ft").on("touchstart", fadeThemIn);
+  $(".ft").on("touchstart, click", fadeThemIn);
   $(".ft").on("touchend", fadeThemOut);
 
-  $(".ft").mouseup(function() {
+  $(".ft").dblclick(function() {
       window.open($(this).children('.ftInfo').eq(0).attr("href"), "_blank");
+  });
+
+  // Double tap hack here.
+  let dblClicked = false;
+  $(".ft").on("click", function() {
+      if (dblClicked) {
+        window.open($(this).children('.ftInfo').eq(0).attr("href"), "_blank");
+      }
+      dblClicked = true;
+      setTimeout(() => { dblClicked = false; }, 300);
   });
 
   $("#headerText").click(function() {
@@ -201,6 +211,9 @@ $(document).ready(function() {
   if ($(window).width() <= 670) {
     $(".ft").removeClass("uk-margin-medium-left");
     $(".firstInGrid").addClass("uk-width-medium uk-height-medium");
+    $(".mobilenot").text("Double-Tap to Visit");
+  } else {
+    $(".mobilenot").text("Double-Click to Visit");
   }
 });
 
