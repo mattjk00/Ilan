@@ -106,6 +106,12 @@ function displayData() {
 }
 
 function adminListData() {
+
+    // redirect non-admins.
+    if (firebase.auth().currentUser == null) {
+      window.location.href = "index.html";
+    }
+
     let listDom = document.getElementById("dlistadmin");
     for (let i = 0; i < discData.length; i++) {
         let entry = createCard(discData[i]);
@@ -236,7 +242,7 @@ function prepareAdminPage() {
   check = $("#admincheck");
   check.hide();
 
-    
+  
 }
 
 
@@ -294,4 +300,13 @@ function saveEdits() {
           alert(error);
         });
     }
+}
+
+function logout() {
+    firebase.auth().signOut().then(() => {
+      window.location.href = "index.html";
+    },
+    (error) => {
+      console.log("Failed to logout.");
+    });
 }
