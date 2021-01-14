@@ -29,6 +29,9 @@ body {
 .ftInfo:hover {
     cursor:pointer;
 }
+.ft {
+    cursor: pointer;
+}
 
 #lc:hover {
     cursor: pointer;
