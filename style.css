@@ -48,7 +48,7 @@ body {
     cursor:pointer;
 }
 
-#headerText {
+#headerText, .ft * {
     animation: change-color 5s infinite;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
