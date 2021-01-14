@@ -75,12 +75,13 @@ html {
 
 #lc {
     border:1px solid #555;
+    padding:8px;
 }
 
 .mobilenot { display: none; }
 
 @media only screen and (max-width: 670px) {
-    .fttt { margin-left:2vw; box-shadow: 5px 5px 5px #222;}
-    /*#suki { margin-left: 5vw;}*/
+    .fttt { box-shadow: 5px 5px 5px #222;}
+    /*#ftgrid { text-align: left; border:1px solid red; display: inline-block; }*/
     .mobilenot { display: block; }
 }
