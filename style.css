@@ -56,6 +56,10 @@ body {
     user-select: none; /* Standard */
 }
 
+.rbg {
+    background-color: red;
+}
+
 @keyframes change-color {
     0% {color: rgb(255, 255, 255);}
   25%  {color: rgb(160, 204, 255);}
