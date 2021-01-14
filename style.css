@@ -52,11 +52,14 @@ body {
 }
 
 #headerText, .ft * {
-    animation: change-color 5s infinite;
+    
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
+}
+#headerText {
+    animation: change-color 5s infinite;
 }
 
 .rbg {
