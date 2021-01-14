@@ -186,9 +186,9 @@ $(document).ready(function() {
   $(".ft").on("touchstart, click", fadeThemIn);
   $(".ft").on("touchend", fadeThemOut);
 
-  $(".ft").dblclick(function() {
+  /*$(".ft").dblclick(function() {
       window.open($(this).children('.ftInfo').eq(0).attr("href"), "_blank");
-  });
+  });*/
 
   // Double tap hack here.
   let dblClicked = false;
