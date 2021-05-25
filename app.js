@@ -55,6 +55,9 @@ function submitLoginForm() {
 /**/
 
 function getData(onComplete) {
+
+    retrieveFeatured();
+
     db.collection("links").get().then(function(querySnapshot) {
 
       document.querySelectorAll('.spinner').forEach(e => e.remove());
@@ -126,6 +129,44 @@ function adminListData() {
             listDom.appendChild(entry);
         }
     }*/
+}
+
+function retrieveFeatured() {
+  const linksRef = db.collection("links");
+
+  db.collection("featured").orderBy("order").get().then(function(q) {
+    q.forEach(doc => {
+      let data = doc.data();
+      updateFtCardContent(data, linksRef);
+    })
+  });
+}
+
+async function updateFtCardContent(data, linksRef) {
+  let mainDiv = document.getElementById("ft" + data.order);
+  mainDiv.setAttribute("data-src", data.img_src);
+
+  const linkSnapshot = await linksRef.where('uid', '==', data.link_id).get();
+  let link;
+  if (!linkSnapshot.empty) {
+    linkSnapshot.forEach(doc => {
+      link = doc.data();
+    });
+    console.log(link);
+    let linkDiv = document.querySelector(`#ft${data.order} div`);
+    linkDiv.setAttribute("href", link.src);
+
+    let titleTag = document.querySelector(`#ft${data.order} div h1`);
+    titleTag.innerHTML = link.displayText;
+
+    let roleTag = document.querySelector(`#ft${data.order} div p`);
+    roleTag.innerHTML = link.list;
+
+  } else {
+    console.log("ERROR");
+  }
+
+  
 }
 
 function createCard(linkdata) {
