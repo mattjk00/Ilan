@@ -2,14 +2,9 @@ const MIX = "mixing";
 const MAS = "mastering";
 const ENG = "engineering";
 
-let linkMap = new Map();
-linkMap.set(MIX, []);
-linkMap.set(MAS, []);
-linkMap.set(ENG, []);
-
+// List for storing fetched discography data.
 let discData = [];
-
-
+// Configure firbase
 var firebaseConfig = {
     apiKey: "AIzaSyAZVS4VPzvlkpopkhJrie1Onk7-RNe4mZs",
     authDomain: "ilan-bc1b3.firebaseapp.com",
@@ -18,23 +13,23 @@ var firebaseConfig = {
     messagingSenderId: "715467029812",
     appId: "1:715467029812:web:319a4b5762c6c742457961"
 };
-  
 firebase.initializeApp(firebaseConfig);
-
 var db = firebase.firestore();
 
 function sortLinks(a, b) {
   return a.order - b.order;
 }
 
+/**
+ * Called when admin attempts login
+ */
 function submitLoginForm() {
-    console.log("starting...");
     let username = document.getElementById("username").value;
     let pword = document.getElementById("password").value;
 
+    // Show spinner and hide error message
     let spinner = document.getElementById("spinner");
     spinner.style.display = "block";
-    
 
     let notif = document.getElementById("notif");
     notif.style.display = "none";
@@ -52,8 +47,10 @@ function submitLoginForm() {
     });
 }
 
-/**/
-
+/**
+ * Retrieve data from database and store in the discData array.
+ * @param {Funciton} onComplete 
+ */
 function getData(onComplete) {
 
     retrieveFeatured();
@@ -64,33 +61,20 @@ function getData(onComplete) {
 
         querySnapshot.forEach(function(doc) {
             let data = doc.data();
-            //linkMap.get(data.list).push([data.src, data.displayText, data.list, data.order, doc.id]);
-
-            //linkMap.get(data.list).sort(sortLinks);
             discData.push(data);
-            discData.sort(sortLinks);
         });
+        discData.sort(sortLinks);
         onComplete();
     })
     .catch((error) => {
       console.log(error);
-      //window.location.href = "adminauth.html";
     });
 }
 
+/**
+ * Creates and displays list items for the discography section.
+ */
 function displayData() {
-    /*for (let key of linkMap.keys()) {
-        let listDom = document.getElementById(key);
-        let links = linkMap.get(key);
-        for (let i = 0; i < links.length; i++) {
-            var entry = document.createElement('li');
-            var linkNode = document.createElement('a');
-            linkNode.href = links[i][0];
-            linkNode.innerHTML = links[i][1];
-            entry.appendChild(linkNode);
-            listDom.appendChild(entry);
-        }
-    }*/
     let listDom = document.getElementById("dlist");
     for (let i = 0; i < discData.length; i++) {
       var entry = document.createElement('li');
@@ -108,6 +92,9 @@ function displayData() {
     }
 }
 
+/**
+ * Create cards to display on the admin page.
+ */
 function adminListData() {
 
     // redirect non-admins.
@@ -120,17 +107,11 @@ function adminListData() {
         let entry = createCard(discData[i]);
         listDom.appendChild(entry);  
     }
-
-    /*for (let key of linkMap.keys()) {
-        let listDom = document.getElementById(key);
-        let links = linkMap.get(key);
-        for (let i = 0; i < links.length; i++) {
-            let entry = createCard(links[i])
-            listDom.appendChild(entry);
-        }
-    }*/
 }
 
+/**
+ * Retrieves featured items and attempts to display them.
+ */
 function retrieveFeatured() {
   const linksRef = db.collection("links");
 
@@ -142,6 +123,9 @@ function retrieveFeatured() {
   });
 }
 
+/**
+ * Attempts to update a featured card's content with given data.
+ */
 async function updateFtCardContent(data, linksRef) {
   let mainDiv = document.getElementById("ft" + data.order);
   mainDiv.setAttribute("data-src", data.img_src);
@@ -165,10 +149,11 @@ async function updateFtCardContent(data, linksRef) {
   } else {
     console.log("ERROR");
   }
-
-  
 }
 
+/**
+ * Creates a card DOM object for displaying on the admin page.
+ */
 function createCard(linkdata) {
   var entry = document.createElement("div");
   entry.classList.add("uk-margin");
@@ -188,6 +173,10 @@ function createCard(linkdata) {
   return entry;
 }
 
+/**
+ * Creates a new item to be potentially saved to the discography.
+ * Fetches data from the form.
+ */
 function addItem() {
   let dtbox = document.getElementById("displaytext");
   let urlbox = document.getElementById("url");
@@ -221,21 +210,17 @@ function fadeThemOut() {
   $(this).children('.ftInfo').eq(0).fadeOut(200);
 } 
 
+/**
+ * Setup event handlers and some responsive css properties.
+ */
 $(document).ready(function() {
   $(".uk-sortable").bind('DOMNodeInserted', listMoved);
   
-  /*$(".uk-sortable").on("touchend", listMoved);
-  $(".uk-sortable").on("mouseup mouseleave", listMoved);*/
-
   $(".ftInfo").hide();
   $(".ft").hover(fadeThemIn, fadeThemOut);
 
   $(".ft").on("touchstart, click", fadeThemIn);
   $(".ft").on("touchend", fadeThemOut);
-
-  /*$(".ft").dblclick(function() {
-      window.open($(this).children('.ftInfo').eq(0).attr("href"), "_blank");
-  });*/
 
   // Double tap hack here.
   let dblClicked = false;
@@ -264,7 +249,10 @@ $(document).ready(function() {
   }
 });
 
-
+/**
+ * Is called when an item in the discography list is reordered by admin.
+ * @param {Event} e 
+ */
 function listMoved(e) {
   let listDomItems = e.currentTarget.children;
   
@@ -282,18 +270,17 @@ function prepareAdminPage() {
 
   check = $("#admincheck");
   check.hide();
-
-  
 }
 
-
-
+/**
+ * In need of editing.
+ * Collects discography into objects to save to the database.
+ * Allows the admin to save any edits done to discography.
+ */
 function saveEdits() {
     let listDom = document.getElementById("dlistadmin");
     let listDomItems = listDom.children;
        
-        
-
         check.hide();
         spinner.show();
 
