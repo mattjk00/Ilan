@@ -179,6 +179,7 @@ function createCard(linkdata) {
   entry.setAttribute("list", linkdata.list);
   entry.setAttribute("order", linkdata.order);
   entry.setAttribute("uid", linkdata.uid);
+  entry.setAttribute("year", linkdata.year);
 
   console.log(linkdata);
 
@@ -308,6 +309,7 @@ function saveEdits() {
             let sr = listDomItems[i].getAttribute("src");
             let displaytex = listDomItems[i].getAttribute("displayText");
             let uuid = listDomItems[i].getAttribute("uid");
+            let year = listDomItems[i].getAttribute("year");
             
             let saveObj = {
               list: lis,
@@ -315,7 +317,7 @@ function saveEdits() {
               src: sr,
               displayText: displaytex,
               uid: uuid,
-              year: 2022
+              year: year
             };
             console.log(saveObj);
 
