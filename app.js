@@ -309,7 +309,7 @@ function saveEdits() {
             let sr = listDomItems[i].getAttribute("src");
             let displaytex = listDomItems[i].getAttribute("displayText");
             let uuid = listDomItems[i].getAttribute("uid");
-            let year = listDomItems[i].getAttribute("year");
+            let year = parseInt(listDomItems[i].getAttribute("year"));
             
             let saveObj = {
               list: lis,
