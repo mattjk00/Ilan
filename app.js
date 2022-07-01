@@ -75,7 +75,9 @@ function getData(onComplete) {
  * Creates and displays list items for the discography section.
  */
 function displayData() {
+    let year = -1;
     let listDom = document.getElementById("dlist");
+
     for (let i = 0; i < discData.length; i++) {
       var entry = document.createElement('li');
       entry.classList.add("discli");
@@ -88,6 +90,16 @@ function displayData() {
       roleNode.innerHTML = " - " + data.list;
       roleNode.classList.add("uk-text-italic");
       entry.appendChild(roleNode);
+      
+      // Add a year header if needed
+      if (data.year && data.year !== year) {
+        let yearHeader = document.createElement('h4');
+        yearHeader.innerHTML = data.year;
+        yearHeader.classList.add('uk-light', 'uk-text-italic');
+        listDom.appendChild(yearHeader);
+        year = data.year;
+      }
+
       listDom.appendChild(entry);
     }
 }
@@ -181,9 +193,11 @@ function addItem() {
   let dtbox = document.getElementById("displaytext");
   let urlbox = document.getElementById("url");
   let rolebox = document.getElementById("role");
+  let yearbox = document.getElementById("year");
   let dt = dtbox.value;
   let url = urlbox.value;
   let role = rolebox.value;
+  let year = yearbox.value;
 
   if (dt !== "" && url !== "") {
     let dobj = {
@@ -191,13 +205,16 @@ function addItem() {
         displayText: dt,
         list: role,
         order: discData.length - 1,
-        uid: dt + Date.now()
+        uid: dt + Date.now(),
+        year: year
     }
     let card = createCard(dobj);
     document.getElementById("dlistadmin").appendChild(card);
 
     dtbox.value = "";
     urlbox.value = "";
+    rolebox.value = "";
+    yearbox.value = "";
   }
 
   
@@ -297,7 +314,8 @@ function saveEdits() {
               order: orde,
               src: sr,
               displayText: displaytex,
-              uid: uuid
+              uid: uuid,
+              year: 2022
             };
             console.log(saveObj);
 
